@@ -10,7 +10,8 @@ import (
 // run the function and call the profile function
 // go tool pprof .\cpuprofile.perf
 
-func Profile() {
+func Profile(d int) {
+	duration := time.Duration(d)
 	f := createCPUProfiler()
 	err := pprof.StartCPUProfile(f)
 	if err != nil {
@@ -23,7 +24,7 @@ func Profile() {
 		}
 	}()
 
-	time.Sleep(5 * time.Second)
+	time.Sleep(duration * time.Second)
 }
 
 func createCPUProfiler() *os.File {

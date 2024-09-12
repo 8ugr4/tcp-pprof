@@ -7,13 +7,14 @@ import (
 	"time"
 )
 
-func InitHTTPServer() {
+func InitHTTPServer(d int) {
+	duration := time.Duration(d)
 	http.HandleFunc("/", handler)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	time.Sleep(30 * time.Second)
+	time.Sleep(duration * time.Second)
 }
 
 func handler(w http.ResponseWriter, _ *http.Request) {
